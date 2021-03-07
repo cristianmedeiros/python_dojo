@@ -34,6 +34,38 @@ def memoria_do_calculo():
     # ler as linhas do arquivo
     # separar as informações da linha
     # pegar o valor fator do incc
+
+    """
+    mes,ano,fator
+    8,1994,100
+    9,1994,100.381
+    10,1994,101.71
+    11,1994,104.11
+    
+for rodada in range(1, total_de_tentativas + 1):
+    print("Tentativa {} de {}".format(rodada, total_de_tentativas))
+    chute_str = input("Digite o numero: ")
+    chute = int(chute_str)
+    print("Voce digitou", chute)
+
+    if (chute < 1 or chute > 100):
+        print("Você deve digitar um número entre 1 e 100!")
+
+    acertou = chute == numero_secreto
+    menor = chute > numero_secreto
+    maior = chute < numero_secreto
+
+    if(acertou):
+        print("Parabens voce acertou!!!")
+        break
+    else:
+        if(menor):
+            print("Chute um numero menor.")
+        elif(maior):\
+            print("Chute um número mais alto.")
+
+"""
+
     
     arquivo = open("incc.csv", "r")
     arquivo_incc = []
@@ -43,19 +75,28 @@ def memoria_do_calculo():
         arquivo_incc.append(linha.split(","))
 
     parcela = 1000.00
-    incc_inicio = float(arquivo_incc[3][2])
-    incc_final = float(arquivo_incc[5][2])
-    saldo_devedor = (parcela / incc_inicio * incc_final) 
+
+    for periodo in range(257,269):
+        incc_inicio = float(arquivo_incc[periodo][2])
+        incc_final = float(arquivo_incc[periodo + 1][2])
+        
+        print("inicio {} - final {}".format(incc_inicio, incc_final))
+        
+        parcela = (parcela / incc_inicio * incc_final) 
+        
+        print(parcela)
+
+
+     
     
-    print(saldo_devedor)    
+    #print(saldo_devedor)    
 
 """
     #valor_do_juros = 0
     incc_compra = 685.489
     incc_hoje = 845.268
     #igpm = 2.58
-    
-    
+        
     incc_valor_compra = valor_da_divida * incc_compra
     incc_valor_hoje = valor_da_divida * incc_hoje
     # valor_da_parcela / incc_compra * incc_hoje
