@@ -28,55 +28,53 @@
 
 def memoria_do_calculo():
 
-    #valor_da_divida = int(input("Entre com o valor da parcela: "))
-    # abrir arquivo incc.csv
-    ## Modos de abertura de arquivo: r (read), w (write), a (append)
-    # ler as linhas do arquivo
-    # separar as informações da linha
-    # pegar o valor fator do incc
-
     """
     mes,ano,fator
     8,1994,100
     9,1994,100.381
     10,1994,101.71
     11,1994,104.11
+    """    
     
-for rodada in range(1, total_de_tentativas + 1):
-    print("Tentativa {} de {}".format(rodada, total_de_tentativas))
-    chute_str = input("Digite o numero: ")
-    chute = int(chute_str)
-    print("Voce digitou", chute)
-
-    if (chute < 1 or chute > 100):
-        print("Você deve digitar um número entre 1 e 100!")
-
-    acertou = chute == numero_secreto
-    menor = chute > numero_secreto
-    maior = chute < numero_secreto
-
-    if(acertou):
-        print("Parabens voce acertou!!!")
-        break
-    else:
-        if(menor):
-            print("Chute um numero menor.")
-        elif(maior):\
-            print("Chute um número mais alto.")
-
-"""
-
-    
-    arquivo = open("incc.csv", "r")
+    arquivo = open("incc.csv", "r")   #abre o arquivo em modo leitura
     arquivo_incc = []
 
-    for linha in arquivo:
-        linha = linha.strip()
-        arquivo_incc.append(linha.split(","))
+    for linha in arquivo: #passa pelas linhas do aruivo
+        linha = linha.strip() #remove espaços e caracteres especiais
+        arquivo_incc.append(linha.split(",")) #quebra a linha em cada virgula, e adiciona no array arquivo_incc
 
-    parcela = 1000.00
+    parcela = 1000.00 #Valor inicial da parcela, esse valor poderia vir de um input do usuario
+    
+    data_inicio = "{},{}".format(9,2008).split(",") #Esse valor podemos definir na mao, ou pegar do input do usuario
+    data_inicio_mes = data_inicio[0]
+    data_inicio_ano = data_inicio[1]
 
-    for periodo in range(257,269):
+    data_fim = "{},{}".format(12,2008).split(",") #Esse valor podemos definir na mao, ou pegar do input do usuario
+    data_fim_mes = data_fim[0]
+    data_fim_ano = data_fim[1]
+    
+    range_incio = 0
+    for linha_i in arquivo_incc:
+        if linha_i[0] == data_inicio_mes and linha_i[1] == data_inicio_ano:
+            print(linha_i)
+            break
+        range_incio = range_incio + 1
+
+    range_fim = 0
+    for linha_f in arquivo_incc:
+        if linha_f[0] == data_fim_mes and linha_f[1] == data_fim_ano:
+            print(linha_f)
+            break
+        range_fim = range_fim + 1
+    
+    
+    #range_incio = 0000 #Esse valor deve vir da data de inicio
+    #range_fim = 0000 #Esse valor deve vir da data de fim
+    ##                                  ###
+    ##  TEMOS QUE RESOLVER A DEFAZAGEM  ###
+    ##                                  ###
+
+    for periodo in range(range_incio,range_fim):
         incc_inicio = float(arquivo_incc[periodo][2])
         incc_final = float(arquivo_incc[periodo + 1][2])
         
@@ -86,22 +84,11 @@ for rodada in range(1, total_de_tentativas + 1):
         
         print(parcela)
 
-
-     
-    
-    #print(saldo_devedor)    
-
-"""
-    #valor_do_juros = 0
-    incc_compra = 685.489
-    incc_hoje = 845.268
-    #igpm = 2.58
-        
-    incc_valor_compra = valor_da_divida * incc_compra
-    incc_valor_hoje = valor_da_divida * incc_hoje
-    # valor_da_parcela / incc_compra * incc_hoje
-    print((valor_da_divida / incc_valor_compra) * incc_valor_hoje)
-"""
 if __name__ == "__main__":
     memoria_do_calculo()
 
+"""
+git status - lista os arquivos que foram alterados
+git add NOMEDOARQUIVO - adiciona os arquivos que foram alterados
+git commit -m MENSAGEMDECOMMIT - Envia os arquivos alterados para o repositorio local, com a mensagem das alterações
+git push origin master - Envia os arquivos do repositorio local para o repositorio remoto
