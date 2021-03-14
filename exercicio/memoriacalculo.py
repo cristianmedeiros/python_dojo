@@ -92,3 +92,4 @@ git status - lista os arquivos que foram alterados
 git add NOMEDOARQUIVO - adiciona os arquivos que foram alterados
 git commit -m MENSAGEMDECOMMIT - Envia os arquivos alterados para o repositorio local, com a mensagem das alterações
 git push origin master - Envia os arquivos do repositorio local para o repositorio remoto
+"""
