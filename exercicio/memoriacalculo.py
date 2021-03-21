@@ -45,18 +45,20 @@ def memoria_do_calculo():
 
     parcela = 1000.00 #Valor inicial da parcela, esse valor poderia vir de um input do usuario
     
-    data_inicio = "{},{}".format(9,2008).split(",") #Esse valor podemos definir na mao, ou pegar do input do usuario
+    data_inicio = "{},{}".format(9,2008) #Esse valor podemos definir na mao, ou pegar do input do usuario
+    data_inicio = captura_data(data_inicio) 
     data_inicio_mes = data_inicio[0]
     data_inicio_ano = data_inicio[1]
 
-    data_fim = "{},{}".format(12,2008).split(",") #Esse valor podemos definir na mao, ou pegar do input do usuario
+    data_fim = "{},{}".format(12,2008)
+    data_fim = captura_data(data_fim) 
     data_fim_mes = data_fim[0]
     data_fim_ano = data_fim[1]
     
     range_incio = 0
     for linha_i in arquivo_incc:
         if linha_i[0] == data_inicio_mes and linha_i[1] == data_inicio_ano:
-            print(linha_i)
+            print(linha_i)  
             break
         range_incio = range_incio + 1
 
@@ -66,7 +68,6 @@ def memoria_do_calculo():
             print(linha_f)
             break
         range_fim = range_fim + 1
-    
     
     #range_incio = 0000 #Esse valor deve vir da data de inicio
     #range_fim = 0000 #Esse valor deve vir da data de fim
@@ -83,6 +84,12 @@ def memoria_do_calculo():
         parcela = (parcela / incc_inicio * incc_final) 
         
         print(parcela)
+
+
+def captura_data(data):
+    data_vec = data.split(",")
+    return data_vec
+
 
 if __name__ == "__main__":
     memoria_do_calculo()
