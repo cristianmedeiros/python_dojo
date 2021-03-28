@@ -45,29 +45,18 @@ def memoria_do_calculo():
 
     parcela = 1000.00 #Valor inicial da parcela, esse valor poderia vir de um input do usuario
     
-    data_inicio = "{},{}".format(9,2008) #Esse valor podemos definir na mao, ou pegar do input do usuario
-    data_inicio = captura_data(data_inicio) 
-    data_inicio_mes = data_inicio[0]
-    data_inicio_ano = data_inicio[1]
+    print("Qual a data inicio")
+    data_inicio = pede_data() #Esse valor podemos definir na mao, ou pegar do input do usuario
+    data_inicio_mes, data_inicio_ano  = captura_data(data_inicio) 
 
-    data_fim = "{},{}".format(12,2008)
-    data_fim = captura_data(data_fim) 
-    data_fim_mes = data_fim[0]
-    data_fim_ano = data_fim[1]
+    print("Qual a data final")
+    data_fim = pede_data()
+    data_fim_mes, data_fim_ano = captura_data(data_fim)
+     
     
-    range_incio = 0
-    for linha_i in arquivo_incc:
-        if linha_i[0] == data_inicio_mes and linha_i[1] == data_inicio_ano:
-            print(linha_i)  
-            break
-        range_incio = range_incio + 1
-
-    range_fim = 0
-    for linha_f in arquivo_incc:
-        if linha_f[0] == data_fim_mes and linha_f[1] == data_fim_ano:
-            print(linha_f)
-            break
-        range_fim = range_fim + 1
+    range_incio = intervalo(data_inicio_mes, data_inicio_ano, arquivo_incc)
+    range_fim = intervalo(data_fim_mes, data_fim_ano, arquivo_incc)
+    
     
     #range_incio = 0000 #Esse valor deve vir da data de inicio
     #range_fim = 0000 #Esse valor deve vir da data de fim
@@ -75,7 +64,7 @@ def memoria_do_calculo():
     ##  TEMOS QUE RESOLVER A DEFAZAGEM  ###
     ##                                  ###
 
-    for periodo in range(range_incio,range_fim):
+    for periodo in range(range_incio, range_fim):
         incc_inicio = float(arquivo_incc[periodo][2])
         incc_final = float(arquivo_incc[periodo + 1][2])
         
@@ -88,8 +77,24 @@ def memoria_do_calculo():
 
 def captura_data(data):
     data_vec = data.split(",")
-    return data_vec
+    return data_vec[0], data_vec[1]
 
+def intervalo(data_mes,data_ano,arquivo_incc):
+    periodo = 0
+    for linha_i in arquivo_incc:
+        if linha_i[0] == data_mes and linha_i[1] == data_ano:
+            print(linha_i)  
+            break
+        periodo = periodo + 1
+    return periodo
+
+
+def pede_data():
+    data_mes = input("Qual o mes do periodo? ")
+    data_ano = input("Qual o ano do periodo? ")
+    data = "{},{}".format(data_mes.strip(),data_ano.strip())
+    return data
+       
 
 if __name__ == "__main__":
     memoria_do_calculo()
