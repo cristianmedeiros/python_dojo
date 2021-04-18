@@ -77,13 +77,16 @@ def memoria_do_calculo():
 
 def captura_data(data):
     data_vec = data.split(",")
+    data_vec[0] = int(data_vec[0])-2
+    print(data_vec[0])
+    data_vec[1] = int(data_vec[1])-2
     return data_vec[0], data_vec[1]
 
 def intervalo(data_mes,data_ano,arquivo_incc):
     periodo = 0
     for linha_i in arquivo_incc:
         if linha_i[0] == data_mes and linha_i[1] == data_ano:
-            print(linha_i)  
+            print(linha_i)     
             break
         periodo = periodo + 1
     return periodo
