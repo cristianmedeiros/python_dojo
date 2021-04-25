@@ -27,14 +27,6 @@
 # Gerar arquivo com a memoria de calculo
 
 def memoria_do_calculo():
-
-    """
-    mes,ano,fator
-    8,1994,100
-    9,1994,100.381
-    10,1994,101.71
-    11,1994,104.11
-    """    
     
     arquivo = open("incc.csv", "r")   #abre o arquivo em modo leitura
     arquivo_incc = []
@@ -52,17 +44,13 @@ def memoria_do_calculo():
     print("Qual a data final")
     data_fim = pede_data()
     data_fim_mes, data_fim_ano = captura_data(data_fim)
-     
-    
+        
     range_incio = intervalo(data_inicio_mes, data_inicio_ano, arquivo_incc)
     range_fim = intervalo(data_fim_mes, data_fim_ano, arquivo_incc)
     
-    
-    #range_incio = 0000 #Esse valor deve vir da data de inicio
-    #range_fim = 0000 #Esse valor deve vir da data de fim
-    ##                                  ###
-    ##  TEMOS QUE RESOLVER A DEFAZAGEM  ###
-    ##                                  ###
+    ##### Tratamento de parcela atrasada ####
+    #Multa é sempre 2%
+    #Juros é 1% ao mes dividido pela quantidade de dias em atraso
 
     for periodo in range(range_incio, range_fim):
         incc_inicio = float(arquivo_incc[periodo][2])
@@ -75,18 +63,26 @@ def memoria_do_calculo():
         print(parcela)
 
 
-def captura_data(data):
+def captura_data(data, defazagem=2):
     data_vec = data.split(",")
-    data_vec[0] = int(data_vec[0])-2
-    print(data_vec[0])
-    data_vec[1] = int(data_vec[1])-2
+    data_vec[0] = int(data_vec[0]) - defazagem
+    data_vec[1] = int(data_vec[1])
+
+    if data_vec[0] == -1:
+        data_vec[0] = 11
+        data_vec[1] = data_vec[1] - 1
+
+    if data_vec[0] == 0:
+        data_vec[0] = 12
+        data_vec[1] = data_vec[1] - 1 
+        
     return data_vec[0], data_vec[1]
 
 def intervalo(data_mes,data_ano,arquivo_incc):
     periodo = 0
     for linha_i in arquivo_incc:
-        if linha_i[0] == data_mes and linha_i[1] == data_ano:
-            print(linha_i)     
+        if int(linha_i[0]) == data_mes and int(linha_i[1]) == data_ano:
+            print(linha_i)
             break
         periodo = periodo + 1
     return periodo
