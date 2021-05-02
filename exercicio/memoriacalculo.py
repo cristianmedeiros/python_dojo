@@ -49,6 +49,7 @@ def memoria_do_calculo():
     range_fim = intervalo(data_fim_mes, data_fim_ano, arquivo_incc)
     
     ##### Tratamento de parcela atrasada ####
+    #Data de vencimento da parcela#
     #Multa é sempre 2%
     #Juros é 1% ao mes dividido pela quantidade de dias em atraso
 
@@ -87,6 +88,19 @@ def intervalo(data_mes,data_ano,arquivo_incc):
         periodo = periodo + 1
     return periodo
 
+def data_completa():
+    data_completa_inicio_calculo = input ("por favor, informar a data do inicio do contrato")
+    data_completa_venc = input ("por favor, informar a data do vencimento da parcela")
+    fatias(data_completa_venc
+    data_completa_final = input ("por favor, informar a data de validade do calculo")
+
+def fatias(data_completa):
+    data_completa_inicio_calculo = data_completa.split("/")
+    data_completa_inicio_calculo_dia = int(data_completa_inicio_calculo[0])'''10'''
+    data_completa_inicio_calculo_mes = int(data_completa_inicio_calculo[1])'''08'''
+    data_completa_inicio_calculo_ano = int(data_completa_inicio_calculo[2])'''2020'''
+    return data_completa_inicio_calculo_dia, data_completa_inicio_calculo_mes, data_completa_inicio_calculo_ano
+    
 
 def pede_data():
     data_mes = input("Qual o mes do periodo? ")
