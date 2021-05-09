@@ -37,13 +37,19 @@ def memoria_do_calculo():
 
     parcela = 1000.00 #Valor inicial da parcela, esse valor poderia vir de um input do usuario
     
-    print("Qual a data inicio")
+    print("Qual a data da compra")
     data_inicio = pede_data() #Esse valor podemos definir na mao, ou pegar do input do usuario
     data_inicio_mes, data_inicio_ano  = captura_data(data_inicio) 
-
-    print("Qual a data final")
+    
+    print("Qual o vencimento da parcela")
+    data_venc_dia, data_venc_mes, data_venc_ano = data_completa() #Esse valor podemos definir na mao, ou pegar do input do usuario
+    print("dia {}, mes {}, ano {}".format(data_venc_dia, data_venc_mes, data_venc_ano))
+    
+    print("Qual a data base do cálculo")
     data_fim = pede_data()
     data_fim_mes, data_fim_ano = captura_data(data_fim)
+    
+    
         
     range_incio = intervalo(data_inicio_mes, data_inicio_ano, arquivo_incc)
     range_fim = intervalo(data_fim_mes, data_fim_ano, arquivo_incc)
@@ -89,16 +95,14 @@ def intervalo(data_mes,data_ano,arquivo_incc):
     return periodo
 
 def data_completa():
-    data_completa_inicio_calculo = input ("por favor, informar a data do inicio do contrato")
-    data_completa_venc = input ("por favor, informar a data do vencimento da parcela")
-    fatias(data_completa_venc
-    data_completa_final = input ("por favor, informar a data de validade do calculo")
+    data = input("Informe a data: ")
+    return fatias(data)
 
 def fatias(data_completa):
     data_completa_inicio_calculo = data_completa.split("/")
-    data_completa_inicio_calculo_dia = int(data_completa_inicio_calculo[0])'''10'''
-    data_completa_inicio_calculo_mes = int(data_completa_inicio_calculo[1])'''08'''
-    data_completa_inicio_calculo_ano = int(data_completa_inicio_calculo[2])'''2020'''
+    data_completa_inicio_calculo_dia = int(data_completa_inicio_calculo[0])
+    data_completa_inicio_calculo_mes = int(data_completa_inicio_calculo[1])
+    data_completa_inicio_calculo_ano = int(data_completa_inicio_calculo[2])
     return data_completa_inicio_calculo_dia, data_completa_inicio_calculo_mes, data_completa_inicio_calculo_ano
     
 
